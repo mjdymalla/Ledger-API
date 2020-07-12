@@ -29,11 +29,11 @@ public class ReceiptController {
         BigDecimal totalRent = tenant.getRent();
 
         // If total rent goes negative rent credit can be carried over
-        totalRent.subtract(rentCredit.add(receipt.getAmount()));
+        totalRent = totalRent.subtract(rentCredit.add(receipt.getAmount()));
 
-        if (totalRent.equals(new BigDecimal('0'))) {
+        if (totalRent.compareTo(new BigDecimal("0.00")) <= 0) {
             // Set tenants rent credit after payment (will be 0 unless payment and credit exceeded rent amount)
-            tenant.setRentCredit(totalRent / -1);
+            tenant.setRentCredit(totalRent.negate());
 
             // Advance period one week (assuming standard period is one week)
             LocalDate advancePeriod = tenant.getPaidToDate().plus(1, ChronoUnit.WEEKS);
