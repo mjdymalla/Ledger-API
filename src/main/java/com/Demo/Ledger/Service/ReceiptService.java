@@ -1,6 +1,7 @@
-package com.Demo.Ledger.Repository;
+package com.Demo.Ledger.Service;
 
 import com.Demo.Ledger.Entity.Receipt;
+import com.Demo.Ledger.Repository.ReceiptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

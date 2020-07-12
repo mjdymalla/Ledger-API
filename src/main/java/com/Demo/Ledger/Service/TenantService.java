@@ -1,6 +1,7 @@
-package com.Demo.Ledger.Repository;
+package com.Demo.Ledger.Service;
 
 import com.Demo.Ledger.Entity.Tenant;
+import com.Demo.Ledger.Repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

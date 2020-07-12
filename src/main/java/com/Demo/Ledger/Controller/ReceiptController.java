@@ -2,8 +2,8 @@ package com.Demo.Ledger.Controller;
 
 import com.Demo.Ledger.Entity.Receipt;
 import com.Demo.Ledger.Entity.Tenant;
-import com.Demo.Ledger.Repository.ReceiptService;
-import com.Demo.Ledger.Repository.TenantService;
+import com.Demo.Ledger.Service.ReceiptService;
+import com.Demo.Ledger.Service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +47,7 @@ public class ReceiptController {
         return -1;
     }
 
+    // Get list of receipts for a given tenant
     @GetMapping("/receipt/{tenantId}")
     private List<Receipt> getTenantReceipts(@PathVariable("tenantId") int tenantId) {
         return receiptService.getTenantReceipts(tenantId);
