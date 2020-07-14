@@ -19,7 +19,7 @@ public class Receipt {
 
     // Should be time stamped when instantiated
     @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private final LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now();
 
     public int getId() { return id; }
 
@@ -40,4 +40,6 @@ public class Receipt {
     }
 
     public LocalDateTime getCreated() { return created; }
+
+    public void setCreated(LocalDateTime created) { this.created = created;}
 }

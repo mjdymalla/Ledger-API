@@ -19,7 +19,7 @@ public class Tenant {
     private BigDecimal rentCredit;
 
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate paidToDate = null;
+    private LocalDate paidToDate = LocalDate.now();
 
     public Tenant() {};
 

@@ -25,6 +25,7 @@ public class TenantControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    // Test GET request to return list of all tenants
     @Test
     public void getAllTenants() throws Exception {
         mockMvc.perform(get("/tenants")
@@ -34,16 +35,18 @@ public class TenantControllerTest {
                 .andExpect(jsonPath("$[0].name", is("Markus")));
     }
 
+    // Test POST request for adding new tenant
     @Test
     public void insertTenant() throws Exception {
         Tenant test = new Tenant("Mark", new BigDecimal("0"), new BigDecimal("0"));
+        test.setPaidToDate(null);
         mockMvc.perform(post("/tenants")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(test))
-                .accept(MediaType.APPLICATION_JSON))
+                .content(asJsonString(test)))
                 .andExpect(status().isOk());
     }
 
+    // Test GET request to return specified tenant given id
     @Test
     public void getTenantById() throws Exception {
         mockMvc.perform(get("/tenants/?=id", 1010)
@@ -52,14 +55,15 @@ public class TenantControllerTest {
                 .andExpect(jsonPath("$[0].name", is("Markus")));
     }
 
+    // Test GET request on returning all receipts generated within n hours
+    // If request is returning correct amount both calls to receiptService and tenantService work
     @Test
     public void getReceiptsInTimeFrame() throws Exception {
-        mockMvc.perform(get("/tenants/receipts/?=hours", 10)
+        mockMvc.perform(get("/tenants/receipts/100")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(5)));
     }
-
 
     public static String asJsonString(final Object obj) {
         try {
