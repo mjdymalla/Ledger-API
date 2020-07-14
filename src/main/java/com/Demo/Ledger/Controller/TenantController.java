@@ -23,7 +23,7 @@ public class TenantController {
 
     // Return list of all tenants
     @GetMapping("/tenants")
-    private List<Tenant> getAllTenants() {
+    List<Tenant> getAllTenants() {
         return tenantService.getAllTenants();
     }
 

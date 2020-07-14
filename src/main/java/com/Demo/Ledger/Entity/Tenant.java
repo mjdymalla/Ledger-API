@@ -21,6 +21,14 @@ public class Tenant {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate paidToDate = LocalDate.now();
 
+    public Tenant() {};
+
+    public Tenant(String name, BigDecimal rent, BigDecimal rentCredit) {
+        this.name = name;
+        this.rent = rent;
+        this.rentCredit = rentCredit;
+    }
+
     public int getId() {
         return id;
     }
