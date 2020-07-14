@@ -34,7 +34,7 @@ public class TenantController {
     }
 
     // Create new tenant
-    @PostMapping("/tenants")
+    @PostMapping(path = "/tenants", consumes = "application/json", produces = "application/json")
     private int addTenant(@RequestBody Tenant tenant) {
         tenantService.saveOrUpdate(tenant);
         return tenant.getId();

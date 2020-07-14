@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TenantControllerTest {
@@ -38,13 +37,27 @@ public class TenantControllerTest {
     @Test
     public void insertTenant() throws Exception {
         Tenant test = new Tenant("Mark", new BigDecimal("0"), new BigDecimal("0"));
-        System.out.println(asJsonString(test));
         mockMvc.perform(post("/tenants")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(test))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
 
+    @Test
+    public void getTenantById() throws Exception {
+        mockMvc.perform(get("/tenants/?=id", 1010)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", is("Markus")));
+    }
+
+    @Test
+    public void getReceiptsInTimeFrame() throws Exception {
+        mockMvc.perform(get("/tenants/receipts/?=hours", 10)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(5)));
     }
 
 
